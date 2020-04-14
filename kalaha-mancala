@@ -1,0 +1,124 @@
+Mancala / kalaha game
+
+
+board is 12 pits and two mancalas
+
+two players
+each player has six pits and larger pit
+6 stones in each pit
+
+take all the pebbles from any of the current player pits, drop one pebble in each following pit until droppping last one
+cannot drop in opponent's big pit, from left to right anti-clockwise
+
+
+# extra turn rule
+if last pebble is in my big pit then
+    - current player can play again
+
+# capture pebbles rule
+if last pebble is in one of current player pit and it is empty (count == 1) then 
+    - capture pebble in current player pit 
+    - capture all the pebbles in opposite pit owned by the other player
+    - drop all the pebbles into current player big pit
+    - current player turn ends
+
+# end game rule
+if all pits from any player are empty then
+    - game ends
+    - both player can collect all the pebbles in his respective pits and drop them into big pit
+
+# Choose winner
+only happens after game has ended
+count all pebbles from each big pit
+winner is the one with higher number of pebbles
+
+turn =>
+    - n moves where n > 1
+move =>
+    - from start_position 
+    - by player
+    - in board 
+
+    - start_position cannot be empty pit
+    - start_position cannot be manacala 
+    - start_position cannot be in gameboard.pit_sections[!player]
+    - board in start_position = 0
+    - add +1 to each pit from start_position + 1
+        - skip gameboard.mancalas[!player]
+
+gameboard
+    - board             = array of size 14 pits
+    - pit_sections      = true => 0...6, false => 7...13
+    - mancalas          = true => 6, false => 13
+
+    init
+        - from 0 to 5 and from 7 to 12
+            - value = 6
+        - 6 and 13
+            - value 0
+
+GameStatus:
+    nextTurn
+    extraTurn
+    pebblesCaptured
+    player1Won
+    player2Won
+
+Rules
+    - condition : gameBoard, lastDropPosition, currentPlayer : bool
+
+Consequence:
+    - consequence : gameBoard, playsNextTurn: player : gameStatus
+
+ExtraTurnRule
+    - condition : 
+        - if lastDropPosition is currentPlayer mancala
+        - consequence : extraTurn
+
+CapturePebblesRule
+    - condition:
+        - if gameboard[lastPOsition]
+
+player
+    - id : boolean
+
+
+
+0 1 2 3 4 5 6 7 8 9 10 11 12 13
+
+13  12  11  10  9   8   7
+    0   1   2   3   4   5   6
+
+0   1   2   3   4   5
+
+7   8   9   10  11  12
+
+
+
+
+POST    /mancala/game
+    in:
+            {
+                gameboard: {id,board}
+                player1: {id}
+                player2: {id}
+            }
+
+PUT     /mancala/game/move
+    in:     
+            {
+                gameboard: {id:board}
+                startPosition: int
+                player: {id}
+            }
+    out:    
+            {
+                originalGameboard: {id,board}
+                gameboard:  {id,board}
+                gameStatus: {
+                    in-progress
+                    player1Won
+                    player2Won
+                }
+                playsNextTurn: player
+            }  

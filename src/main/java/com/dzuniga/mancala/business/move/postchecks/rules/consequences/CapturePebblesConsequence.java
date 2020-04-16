@@ -1,9 +1,11 @@
 package com.dzuniga.mancala.business.move.postchecks.rules.consequences;
 
-import com.dzuniga.mancala.business.move.model.PostCheckResult;
+import com.dzuniga.mancala.business.move.model.MoveResult;
+import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.domain.GameEvent;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Player;
+import com.dzuniga.mancala.util.GameEventCombiner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,15 +14,15 @@ import java.util.List;
 public class CapturePebblesConsequence implements Consequence {
 
   @Override
-  public PostCheckResult apply(
-      Gameboard boardAfterMoving, int lastDropPosition, Player currentPlayer) {
+  public RuleResult apply(MoveResult moveResult, Player currentPlayer) {
 
     Gameboard boardAfterCapturing =
-        Gameboard.captureOppositePitPebbles(boardAfterMoving, lastDropPosition, currentPlayer);
+        Gameboard.captureOppositePitPebbles(
+            moveResult.getGameboard(), moveResult.getLastDropPosition(), currentPlayer);
 
-    return PostCheckResult.of(
+    return RuleResult.of(
         boardAfterCapturing,
-        List.of(GameEvent.pebblesCaptured),
+        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.pebblesCaptured)),
         Player.getOppositePlayer(currentPlayer));
   }
 }

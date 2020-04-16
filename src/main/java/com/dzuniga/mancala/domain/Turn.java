@@ -26,7 +26,7 @@ public class Turn {
   public Turn(
           @JsonProperty("number") Integer number,
           @JsonProperty("events") List<GameEvent> events,
-          @JsonProperty("board") Gameboard currentBoard,
+          @JsonProperty("currentBoard") Gameboard currentBoard,
           @JsonProperty("playing") Player playing,
           @JsonProperty("playerOne") Player playerOne,
           @JsonProperty("playerTwo") Player playerTwo

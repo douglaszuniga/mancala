@@ -1,5 +1,6 @@
-package com.dzuniga.mancala.business.move.prechecks;
+package com.dzuniga.mancala.business.move.validations;
 
+import com.dzuniga.mancala.business.exceptions.NoPebblesInPitException;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Turn;
@@ -8,14 +9,17 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class InsideBoard implements PreCheck {
+public class PitHasPebbles implements MoveValidation {
 
   @Override
-  public boolean test(Move move) {
+  public void validate(Move move) {
     Objects.requireNonNull(move, "The move must not be null");
 
     Turn currentTurn = move.getCurrentTurn();
     Gameboard currentBoard = currentTurn.getCurrentBoard();
-    return move.getStartPosition() >= 0 && move.getStartPosition() < currentBoard.getGameboard().length;
+
+    if (currentBoard.getNumberOfPebblesInPit(move.getStartPosition()) == 0) {
+      throw new NoPebblesInPitException(move);
+    }
   }
 }

@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-public class PostCheckResult {
+public class RuleResult {
 
   private final Gameboard gameboard;
   private final List<GameEvent> gameEvents;
   private final Player nextPlayer;
 
-  private PostCheckResult(Gameboard gameboard, List<GameEvent> gameEvents, Player nextPlayer) {
+  private RuleResult(Gameboard gameboard, List<GameEvent> gameEvents, Player nextPlayer) {
 
     Objects.requireNonNull(gameboard, "The gameboard must be null");
     Objects.requireNonNull(gameEvents, "The game events list must be null");
@@ -26,8 +26,7 @@ public class PostCheckResult {
     this.nextPlayer = nextPlayer;
   }
 
-  public static PostCheckResult of(
-      Gameboard gameboard, List<GameEvent> gameEvents, Player nextPlayer) {
-    return new PostCheckResult(gameboard, gameEvents, nextPlayer);
+  public static RuleResult of(Gameboard gameboard, List<GameEvent> gameEvents, Player nextPlayer) {
+    return new RuleResult(gameboard, gameEvents, nextPlayer);
   }
 }

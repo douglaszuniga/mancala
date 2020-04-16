@@ -1,79 +1,86 @@
 package com.dzuniga.mancala.business.move;
 
+import com.dzuniga.mancala.business.exceptions.MoveValidationException;
 import com.dzuniga.mancala.business.move.model.MoveResult;
-import com.dzuniga.mancala.business.move.model.PostCheckResult;
-import com.dzuniga.mancala.business.move.postchecks.PostCheck;
-import com.dzuniga.mancala.business.move.prechecks.PreCheck;
+import com.dzuniga.mancala.business.move.model.RuleResult;
+import com.dzuniga.mancala.business.move.postchecks.RulesApplier;
+import com.dzuniga.mancala.business.move.validations.MoveValidation;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Player;
 import com.dzuniga.mancala.domain.Turn;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 
 @Component
 public class DefaultMoveHandler implements MoveHandler {
 
-  //TODO: refactor to use a list and get check message from the precheck
-  private final PreCheck inPlayerSection;
-  private final PreCheck insideBoard;
-  private final PreCheck notInEmptyPit;
-  private final PreCheck notInMancala;
+  /**
+   * all the validations that need to run BEFORE applying the move
+   */
+  private final MoveValidation inCurrentPlayerSection;
+  private final MoveValidation insideBoard;
+  private final MoveValidation pitHasPebbles;
+  private final MoveValidation fromAPit;
 
+  /**
+   * handler that knows how to apply the move in the gameboard
+   */
   private final DropPebblesHandler dropPebblesHandler;
 
-  private final PostCheck postCheck;
+  /**
+   * check all the game rules and apply the actions based on those rules
+   */
+  private final RulesApplier rulesApplier;
 
   public DefaultMoveHandler(
-      PreCheck inPlayerSection,
-      PreCheck insideBoard,
-      PreCheck notInEmptyPit,
-      PreCheck notInMancala,
+      MoveValidation inCurrentPlayerSection,
+      MoveValidation insideBoard,
+      MoveValidation pitHasPebbles,
+      MoveValidation fromAPit,
       DropPebblesHandler dropPebblesHandler,
-      PostCheck postCheck) {
+      RulesApplier rulesApplier) {
 
-    this.inPlayerSection = inPlayerSection;
+    this.inCurrentPlayerSection = inCurrentPlayerSection;
     this.insideBoard = insideBoard;
-    this.notInEmptyPit = notInEmptyPit;
-    this.notInMancala = notInMancala;
+    this.pitHasPebbles = pitHasPebbles;
+    this.fromAPit = fromAPit;
     this.dropPebblesHandler = dropPebblesHandler;
-    this.postCheck = postCheck;
+    this.rulesApplier = rulesApplier;
   }
 
   @Override
-  public Turn apply(Move move) {
+  public Turn apply(Move move) throws MoveValidationException {
     Objects.requireNonNull(move, "The move must not be null");
 
-    // todo: combine prechecks into a validate move
-    if (!inPlayerSection.test(move)) {
-      // throw Exception
-    }
-
-    if (!insideBoard.test(move)) {
-      // throw Exception
-    }
-
-    if (!notInEmptyPit.test(move)) {
-      // throw Exception
-    }
-
-    if (!notInMancala.test(move)) {
-      // throw Exception
-    }
-
+    // -- first check that move is valid
+    validateBeforeMoving(move);
+    // -- then start dropping the pebbles
     MoveResult moveResult = dropPebblesHandler.apply(move);
+    // -- then check what is the game status and all the possible action after applying the move
+    RuleResult ruleResult = rulesApplier.apply(move, moveResult);
 
-    //TODO: remove game events from post check
-    PostCheckResult postCheckResult = postCheck.apply(move, moveResult, List.of());
-
+    // -- finally, return the next turn information
     return Turn.builder()
-            .currentBoard(postCheckResult.getGameboard())
-            .events(postCheckResult.getGameEvents())
-            .number(move.getCurrentTurn().getNumber() + 1)
-            .playing(postCheckResult.getNextPlayer())
-            .playerOne(Player.PLAYER_ONE)
-            .playerTwo(Player.PLAYER_TWO)
-            .build();
+        .currentBoard(ruleResult.getGameboard())
+        .events(ruleResult.getGameEvents())
+        .number(move.getCurrentTurn().getNumber() + 1)
+        .playing(ruleResult.getNextPlayer())
+        .playerOne(Player.PLAYER_ONE)
+        .playerTwo(Player.PLAYER_TWO)
+        .build();
+  }
+
+  /**
+   * encapsulates all the validations required before the move
+   * @param move object containing the information regarding the move
+   * @throws MoveValidationException exception in case it didn't pass a validation
+   */
+  private void validateBeforeMoving(Move move) throws MoveValidationException {
+    insideBoard
+        .andThen(inCurrentPlayerSection)
+        .andThen(fromAPit)
+        .andThen(pitHasPebbles)
+        .validate(move);
   }
 }

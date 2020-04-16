@@ -38,7 +38,7 @@ public class Gameboard {
 
   public static final int SIZE = 14;
   private static final int NUMBER_OF_PEBBLES_PER_PIT = 6;
-  private static final int NUMBER_OF_PEBBLES_PER_MANCALA = 6;
+  private static final int NUMBER_OF_PEBBLES_PER_MANCALA = 0;
 
   private final String id;
   private final int[] gameboard;

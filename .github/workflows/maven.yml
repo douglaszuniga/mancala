@@ -21,4 +21,4 @@ jobs:
       with:
         java-version: 14
     - name: Run the Maven verify phase
-      run: mvn -B verify --file pom-ci.xml
+      run: mvn -B verify --file pom.xml

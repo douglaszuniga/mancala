@@ -2,6 +2,7 @@ package com.dzuniga.mancala.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,6 +16,7 @@ public class Move {
     private final int startPosition;
 
     @JsonCreator
+    @Builder
     public Move(
             @JsonProperty("currentTurn") Turn currentTurn,
             @JsonProperty("startPosition") int startPosition) {

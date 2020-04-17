@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+
 @Component
 public class InCurrentPlayerSection implements MoveValidation {
 

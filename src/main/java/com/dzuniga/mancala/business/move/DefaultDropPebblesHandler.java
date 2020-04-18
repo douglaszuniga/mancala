@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This handler will try to apply the move following these steps:
@@ -26,6 +27,8 @@ public class DefaultDropPebblesHandler implements DropPebblesHandler {
 
   @Override
   public MoveResult apply(Move move) {
+    Objects.requireNonNull(move);
+
     Turn currentTurn = move.getCurrentTurn();
     Gameboard board = currentTurn.getCurrentBoard();
     int startPosition = move.getStartPosition();
@@ -56,6 +59,11 @@ public class DefaultDropPebblesHandler implements DropPebblesHandler {
     return MoveResult.of(new Gameboard(board.getId(), newBoard), nextPit, List.of());
   }
 
+  /**
+   * calculates the next pit
+   * @param currentPit current pit
+   * @return next position of the pit
+   */
   private int getNextPositionInboard(int currentPit) {
     return (currentPit + 1) % Gameboard.SIZE;
   }

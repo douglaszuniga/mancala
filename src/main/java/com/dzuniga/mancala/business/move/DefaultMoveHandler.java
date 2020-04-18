@@ -41,6 +41,13 @@ public class DefaultMoveHandler implements MoveHandler {
       DropPebblesHandler dropPebblesHandler,
       RulesApplier rulesApplier) {
 
+    Objects.requireNonNull(inCurrentPlayerSection);
+    Objects.requireNonNull(insideBoard);
+    Objects.requireNonNull(pitHasPebbles);
+    Objects.requireNonNull(fromAPit);
+    Objects.requireNonNull(dropPebblesHandler);
+    Objects.requireNonNull(rulesApplier);
+
     this.inCurrentPlayerSection = inCurrentPlayerSection;
     this.insideBoard = insideBoard;
     this.pitHasPebbles = pitHasPebbles;

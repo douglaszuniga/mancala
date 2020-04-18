@@ -1,5 +1,6 @@
 package com.dzuniga.mancala.business.move.validations;
 
+import com.dzuniga.mancala.business.exceptions.MoveValidationException;
 import com.dzuniga.mancala.domain.Move;
 
 import java.util.Objects;
@@ -14,11 +15,15 @@ public interface MoveValidation {
    *
    * <p>Validate that the move follows the validation rule
    *
-   * <p>Expected Exceptions: - NullPointerException when Move is null
+   * <p>Expected Exceptions:
+   *
+   * NullPointerException when Move is null
+   * MoveValidationException when the validation didn't pass
    *
    * @param move move object containing the necessary info to apply the next move
+   *
    */
-  void validate(Move move);
+  void validate(Move move) throws MoveValidationException;
 
   /**
    * Returns a composed function that first validate move and then run the {@code after} validation

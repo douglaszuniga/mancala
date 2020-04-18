@@ -5,6 +5,7 @@ import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Player;
 import com.dzuniga.mancala.domain.Turn;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +15,18 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DropPebblesHandlerTest {
+public class DefaultDropPebblesHandlerTest {
 
   private DefaultDropPebblesHandler handler;
 
   @BeforeEach
   public void setUp() {
     handler = new DefaultDropPebblesHandler();
+  }
+
+  @Test
+  public void shouldReturnNullPointerExceptionWhenMoveIsNull() {
+    Assertions.assertThrows(NullPointerException.class, () -> handler.apply(null));
   }
 
   @Test

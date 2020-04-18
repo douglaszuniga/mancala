@@ -9,13 +9,20 @@ import com.dzuniga.mancala.util.GameEventCombiner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Applies the capture of the pebbles from the pit + opposite pit and add them into the player's mancala
+ */
 @Component
 public class CapturePebblesConsequence implements Consequence {
 
   @Override
   public RuleResult apply(MoveResult moveResult, Player currentPlayer) {
+    Objects.requireNonNull(moveResult, "The move result must not be null");
+    Objects.requireNonNull(currentPlayer, "The current player must not be null");
 
+    // - delegate the capture logic to the owner of the board state
     Gameboard boardAfterCapturing =
         Gameboard.captureOppositePitPebbles(
             moveResult.getGameboard(), moveResult.getLastDropPosition(), currentPlayer);

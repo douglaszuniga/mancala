@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+/**
+ * Validates that the start position is inside the boundaries of the gameboard
+ */
 @Component
 public class InsideBoard implements MoveValidation {
 

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+/**
+ * Validates that the start position is from a pit that contains at least one pebble
+ */
 @Component
 public class PitHasPebbles implements MoveValidation {
 

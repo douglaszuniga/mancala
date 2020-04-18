@@ -24,7 +24,7 @@ public class Rule implements CombinableRule {
   }
 
   public Optional<RuleResult> runRule(MoveResult moveResult, Player currentPlayer) {
-    if (condition.conditionMet(moveResult, currentPlayer)) {
+    if (condition.test(moveResult, currentPlayer)) {
       return Optional.of(consequence.apply(moveResult, currentPlayer));
     }
     return Optional.empty();

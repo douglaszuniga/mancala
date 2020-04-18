@@ -4,6 +4,9 @@ import com.dzuniga.mancala.domain.Move;
 
 import java.util.Objects;
 
+/**
+ * Functional Interface used to indicate a validation that has to be done before applying a move
+ */
 @FunctionalInterface
 public interface MoveValidation {
   /**

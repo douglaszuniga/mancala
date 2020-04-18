@@ -4,17 +4,24 @@ import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Player;
 import com.dzuniga.mancala.domain.Section;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+/**
+ * Responsible of checking the capture pebbles rule condition.
+ *
+ * <p>Capture pebbles rule condition is triggered when the last dropped pebble was in a empty pit
+ * inside current player section
+ */
 @Component
 public class CapturePebblesCondition implements Condition {
 
   @Override
-  public boolean conditionMet(MoveResult moveResult, Player currentPlayer) {
+  public boolean test(MoveResult moveResult, Player currentPlayer) {
     Objects.requireNonNull(moveResult, "The move result must not be null");
-    Objects.requireNonNull(currentPlayer, "The current player must not be null");
+    Objects.requireNonNull(currentPlayer, "The current currentPlayer must not be null");
 
     if (isLastPositionInAMancala(moveResult.getLastDropPosition())) {
       return false;
@@ -24,7 +31,13 @@ public class CapturePebblesCondition implements Condition {
       return false;
     }
 
-    return moveResult.getGameboard().getNumberOfPebblesInPit(moveResult.getLastDropPosition()) == 1;
+    return isNumberPebblesInLastDropPitEqualsToOne(
+        moveResult.getGameboard(), moveResult.getLastDropPosition());
+  }
+
+  private boolean isNumberPebblesInLastDropPitEqualsToOne(
+      Gameboard gameboard, int lastDropPosition) {
+    return gameboard.getNumberOfPebblesInPit(lastDropPosition) == 1;
   }
 
   private boolean isLastPositionInsideCurrentPlayerSection(

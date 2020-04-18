@@ -8,12 +8,19 @@ import com.dzuniga.mancala.util.GameEventCombiner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Applies the action indicating that the next player is equals to current player and add the
+ * extraTurnGained event to the result not side effects in the board
+ */
 @Component
 public class ExtraTurnConsequence implements Consequence {
 
   @Override
   public RuleResult apply(MoveResult moveResult, Player currentPlayer) {
+    Objects.requireNonNull(moveResult, "The move result must not be null");
+    Objects.requireNonNull(currentPlayer, "The current player must not be null");
 
     return RuleResult.of(
         moveResult.getGameboard(),

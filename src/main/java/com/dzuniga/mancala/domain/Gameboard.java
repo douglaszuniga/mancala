@@ -21,6 +21,7 @@ public class Gameboard {
           Player.PLAYER_ONE, Section.sectionOf(0, 6), Player.PLAYER_TWO, Section.sectionOf(7, 13));
   public static final Map<Player, Integer> MANCALAS =
       Map.of(Player.PLAYER_ONE, 6, Player.PLAYER_TWO, 13);
+  // a more elegant way would be calculating the opposite pit based on the current pit position
   public static final Map<Integer, Integer> OPPOSITE_PIT =
       Map.ofEntries(
           Map.entry(0, 12),
@@ -93,11 +94,12 @@ public class Gameboard {
     return new Gameboard();
   }
 
-  public static Gameboard collectPebblesIntoMancalas(Gameboard input) {
-    Objects.requireNonNull(input, "Input gameboard must not be null");
+  public static Gameboard collectPebblesIntoMancalas(Gameboard currentBoard) {
+    Objects.requireNonNull(currentBoard, "Input gameboard must not be null");
 
-    log.debug("BEFORE collecting the pebbles, gameboard:[{}]", input);
-    int[] output = Arrays.copyOf(input.getGameboard(), Gameboard.SIZE);
+    log.debug("BEFORE collecting the pebbles, gameboard:[{}]", currentBoard.gameboard);
+
+    int[] output = Arrays.copyOf(currentBoard.getGameboard(), Gameboard.SIZE);
     int sumBySection = 0;
     for (int i = 0; i < SIZE; i++) {
       if (Gameboard.MANCALAS.containsValue(i)) {
@@ -108,24 +110,36 @@ public class Gameboard {
         output[i] = 0;
       }
     }
+
     log.debug("AFTER collecting the pebbles, gameboard:[{}]", output);
-    return new Gameboard(input.getId(), output);
+    return new Gameboard(currentBoard.getId(), output);
   }
 
-  public static Gameboard captureOppositePitPebbles(Gameboard input, int pitPosition, Player currentPlayer) {
-    Objects.requireNonNull(input, "Input gameboard must not be null");
+  /**
+   * Collects the current pit pebbles plus the opposite pit pebbles into the current player mancala
+   *
+   * @param currentBoard contains the board state so far
+   * @param pitPosition pit were the last pebble was dropped, used to get the opposite pit
+   * @param currentPlayer player currently playing
+   * @return a new gameboard with the pebbles captured
+   */
+  public static Gameboard captureOppositePitPebbles(Gameboard currentBoard, int pitPosition, Player currentPlayer) {
+    Objects.requireNonNull(currentBoard, "Input gameboard must not be null");
     Objects.requireNonNull(currentPlayer, "Current player must not be null");
     Validate.isTrue(pitPosition >= 0, "Pit position must be greater or equals to zero");
     Validate.isTrue(pitPosition < Gameboard.SIZE, "Pit position must less than board size");
 
-    log.debug("BEFORE capturing the pebbles, gameboard:[{}]", input);
-    int[] output = Arrays.copyOf(input.getGameboard(), Gameboard.SIZE);
-    //TODO: find a way to get opposite without the map
+    log.debug("BEFORE capturing the pebbles, gameboard:[{}]", currentBoard.gameboard);
+
+    int[] output = Arrays.copyOf(currentBoard.getGameboard(), Gameboard.SIZE);
+    // - capture pit and opposite pit pebbles into the player's mancala
     output[Gameboard.MANCALAS.get(currentPlayer)] += output[pitPosition] + output[OPPOSITE_PIT.get(pitPosition)];
+    // - updating the pebble number in each pit involved down to zero
     output[pitPosition] = 0;
     output[OPPOSITE_PIT.get(pitPosition)] = 0;
-    log.debug("BEFORE capturing the pebbles, gameboard:[{}]", output);
 
-    return new Gameboard(input.getId(), output);
+    log.debug("AFTER capturing the pebbles, gameboard:[{}]", output);
+
+    return new Gameboard(currentBoard.getId(), output);
   }
 }

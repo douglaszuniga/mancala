@@ -10,13 +10,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
-@Slf4j
+/**
+ * Applies the following actions: 1. collect the remaining pebbles from each section into its
+ * mancalas 2. determine the game result, player one won, player two won or it was a tie
+ */
 @Component
+@Slf4j
 public class GameEndConsequence implements Consequence {
 
   @Override
   public RuleResult apply(MoveResult moveResult, Player currentPlayer) {
+    Objects.requireNonNull(moveResult, "The move result must not be null");
+    Objects.requireNonNull(currentPlayer, "The current player must not be null");
+
     // - 1. collect remaining pebbles from each player pits and put them into his/her mancala
     Gameboard boardAfterCollectingRemainingPebbles =
         Gameboard.collectPebblesIntoMancalas(moveResult.getGameboard());
@@ -25,7 +33,8 @@ public class GameEndConsequence implements Consequence {
     // - 3. generate the final response of the consequence
     return RuleResult.of(
         boardAfterCollectingRemainingPebbles,
-        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.gameEnded, endGameResult)),
+        GameEventCombiner.combine(
+            moveResult.getGameEvents(), List.of(GameEvent.gameEnded, endGameResult)),
         currentPlayer);
   }
 

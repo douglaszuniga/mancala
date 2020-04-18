@@ -6,6 +6,7 @@ import com.dzuniga.mancala.business.move.postchecks.rules.Rule;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Player;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class DefaultRulesApplier implements RulesApplier {
 
   private final Rule extraTurnRule;
@@ -20,6 +22,10 @@ public class DefaultRulesApplier implements RulesApplier {
   private final Rule gameEndRule;
 
   public DefaultRulesApplier(Rule extraTurnRule, Rule capturePebblesRule, Rule gameEndRule) {
+    Objects.requireNonNull(extraTurnRule, "The extra turn rule must not be null");
+    Objects.requireNonNull(capturePebblesRule, "The capture pebbles rule must not be null");
+    Objects.requireNonNull(gameEndRule, "The game end rule must not be null");
+
     this.extraTurnRule = extraTurnRule;
     this.capturePebblesRule = capturePebblesRule;
     this.gameEndRule = gameEndRule;
@@ -43,7 +49,10 @@ public class DefaultRulesApplier implements RulesApplier {
     // -- otherwise use the original after dropping the pebbles
     MoveResult moveResultFromRuleOrDefault =
         extraTurnOrCaptureResult
-            .map(r -> MoveResult.of(r.getGameboard(), moveResult.getLastDropPosition(), r.getGameEvents()))
+            .map(
+                r ->
+                    MoveResult.of(
+                        r.getGameboard(), moveResult.getLastDropPosition(), r.getGameEvents()))
             .orElse(moveResult);
 
     // -- try to apply the game end rule, using the result produced until this point

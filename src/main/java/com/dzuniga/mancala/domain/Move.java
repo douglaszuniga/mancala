@@ -10,6 +10,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Objects;
 
+/**
+ * Data class that contains the information regarding a move
+ */
 @Data
 public class Move {
     private final Turn currentTurn;

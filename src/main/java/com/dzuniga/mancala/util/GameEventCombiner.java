@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Util class used to combine a two list of events
+ */
 public abstract class GameEventCombiner {
 
   public static List<GameEvent> combine(List<GameEvent> accumulatedSoFar, List<GameEvent> justProduced) {

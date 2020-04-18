@@ -8,11 +8,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.Objects;
 
+/**
+ * Data class that contains the player information and id
+ */
 @Data
 public class Player {
 
-  public static final Player PLAYER_ONE = Player.getPlayerFrom(Boolean.TRUE);
-  public static final Player PLAYER_TWO = Player.getPlayerFrom(Boolean.FALSE);
+  public static final Player PLAYER_ONE = Player.from(Boolean.TRUE);
+  public static final Player PLAYER_TWO = Player.from(Boolean.FALSE);
 
   private final Boolean id;
 
@@ -23,11 +26,23 @@ public class Player {
     this.id = id;
   }
 
+  /**
+   * handy function that will get the opposite player based on current player
+   * @param currentPlayer current player
+   * @return opposite player
+   */
   public static Player getOppositePlayer(Player currentPlayer) {
-    return Player.getPlayerFrom(!currentPlayer.getId());
+    Objects.requireNonNull(currentPlayer, "The current player must not be null");
+
+    return Player.from(!currentPlayer.getId());
   }
 
-  private static Player getPlayerFrom(Boolean id) {
+  /**
+   * Factory method to get a new player
+   * @param id id of the player
+   * @return Player object
+   */
+  private static Player from(Boolean id) {
     return new Player(id);
   }
 

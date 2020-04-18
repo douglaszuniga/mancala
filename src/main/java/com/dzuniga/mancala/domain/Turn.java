@@ -11,6 +11,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Data class containing the information regarding a turn
+ */
 @Data
 public class Turn {
 

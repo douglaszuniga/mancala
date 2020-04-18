@@ -3,6 +3,7 @@ package com.dzuniga.mancala.domain;
 import lombok.Data;
 import org.apache.commons.lang3.Validate;
 
+/** Data class that contains a board section range */
 @Data
 public class Section {
   private final int low;

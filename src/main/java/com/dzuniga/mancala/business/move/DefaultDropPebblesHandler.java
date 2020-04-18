@@ -29,6 +29,11 @@ public class DefaultDropPebblesHandler implements DropPebblesHandler {
   public MoveResult apply(Move move) {
     Objects.requireNonNull(move);
 
+    /*
+     * Improvement:
+     * move the logic related to adding and removing pebbles to the GameBoard class
+     */
+
     Turn currentTurn = move.getCurrentTurn();
     Gameboard board = currentTurn.getCurrentBoard();
     int startPosition = move.getStartPosition();

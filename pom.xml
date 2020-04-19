@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dzuniga</groupId>
     <artifactId>mancala</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>mancala</name>
     <description>Simple mancala game backend</description>
 
@@ -65,20 +65,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-        <!-- test dependencies -->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>5.5.1</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.mockito</groupId>-->
-<!--            <artifactId>mockito-core</artifactId>-->
-<!--            <version>3.3.3</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-        <!-- test dependencies -->
     </dependencies>
 
     <build>

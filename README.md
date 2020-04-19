@@ -2,6 +2,8 @@
 
 Mancala game app is a Spring Boot application exposing a couple of rest endpoints.
 
+A simple front-end app can be found here: https://github.com/douglaszuniga/mancala-fe
+
 ## Requirements
  
 ### Board Setup
@@ -63,6 +65,8 @@ The application integrates a web-ui page where it is possible to check and inter
 ### Non-Functional
 
 - use a repository to save the games and actions
+- add resiliency capabilities (circuit-breakers, retries)
+- add a cache
 - create dockerfile to create images
 - use reactive programming
 - use `Records` instead of data classes

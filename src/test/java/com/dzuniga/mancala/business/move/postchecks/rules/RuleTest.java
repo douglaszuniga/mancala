@@ -1,5 +1,6 @@
 package com.dzuniga.mancala.business.move.postchecks.rules;
 
+import com.dzuniga.mancala.TestUtils;
 import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.business.move.postchecks.rules.conditions.Condition;
@@ -81,5 +82,17 @@ public class RuleTest {
 
     assertFalse(actual.isEmpty());
     assertEquals(expectedRuleResult, actual.get());
+  }
+
+  @Test
+  public void testEquality() {
+
+    Rule alpha = rule;
+    Rule beta = rule;
+    Rule gama = rule;
+
+    Rule delta = Rule.of(mock(Condition.class), mock(Consequence.class));
+
+    TestUtils.assertEqualsContract(alpha, beta, gama, delta);
   }
 }

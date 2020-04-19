@@ -1,6 +1,6 @@
 package com.dzuniga.mancala.business.move;
 
-import com.dzuniga.mancala.business.exceptions.MoveValidationException;
+import com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException;
 import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.business.move.postchecks.RulesApplier;
@@ -41,12 +41,12 @@ public class DefaultMoveHandler implements MoveHandler {
       DropPebblesHandler dropPebblesHandler,
       RulesApplier rulesApplier) {
 
-    Objects.requireNonNull(inCurrentPlayerSection);
-    Objects.requireNonNull(insideBoard);
-    Objects.requireNonNull(pitHasPebbles);
-    Objects.requireNonNull(fromAPit);
-    Objects.requireNonNull(dropPebblesHandler);
-    Objects.requireNonNull(rulesApplier);
+    Objects.requireNonNull(inCurrentPlayerSection, "The inCurrentPlayerSection validation must not be null");
+    Objects.requireNonNull(insideBoard, "The insideBoard validation must not be null");
+    Objects.requireNonNull(pitHasPebbles, "The pitHasPebbles validation must not be null");
+    Objects.requireNonNull(fromAPit, "The fromAPit validation must not be null");
+    Objects.requireNonNull(dropPebblesHandler, "The dropPebblesHandler validation must not be null");
+    Objects.requireNonNull(rulesApplier, "The rulesApplier validation must not be null");
 
     this.inCurrentPlayerSection = inCurrentPlayerSection;
     this.insideBoard = insideBoard;

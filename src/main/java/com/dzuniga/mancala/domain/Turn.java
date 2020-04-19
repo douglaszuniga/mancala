@@ -37,6 +37,9 @@ public class Turn {
 
     Objects.requireNonNull(number, "Turn number must not be null");
     Validate.isTrue(number >= 0, "Turn number must be greater or equals to zero");
+    Objects.requireNonNull(playing, "The current player must not be null");
+    Objects.requireNonNull(playerOne, "Player One must not be null");
+    Objects.requireNonNull(playerTwo, "Player Two must not be null");
     Objects.requireNonNull(events, "Events must not be null");
     Objects.requireNonNull(currentBoard, "Gameboard must not be null");
 

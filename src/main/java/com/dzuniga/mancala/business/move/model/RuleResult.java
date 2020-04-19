@@ -8,6 +8,9 @@ import lombok.Data;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Internal model used to collect the information after applying a {@link com.dzuniga.mancala.business.move.postchecks.rules.Rule}
+ */
 @Data
 public class RuleResult {
 
@@ -26,6 +29,13 @@ public class RuleResult {
     this.nextPlayer = nextPlayer;
   }
 
+  /**
+   * Factory method to get a new RuleResult
+   * @param gameboard the current gameboard state
+   * @param gameEvents list of events
+   * @param nextPlayer Next playing player
+   * @return RuleResult object
+   */
   public static RuleResult of(Gameboard gameboard, List<GameEvent> gameEvents, Player nextPlayer) {
     return new RuleResult(gameboard, gameEvents, nextPlayer);
   }

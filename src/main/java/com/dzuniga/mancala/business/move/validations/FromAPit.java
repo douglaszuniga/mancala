@@ -1,6 +1,6 @@
 package com.dzuniga.mancala.business.move.validations;
 
-import com.dzuniga.mancala.business.exceptions.IncorrectPitException;
+import com.dzuniga.mancala.business.move.validations.exceptions.IncorrectPitException;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
 import org.springframework.stereotype.Component;

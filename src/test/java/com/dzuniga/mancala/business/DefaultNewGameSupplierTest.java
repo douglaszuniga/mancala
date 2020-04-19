@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DefaultNewGameSupplierTest {
 
-  private DefaultNewGameSupplier supplier = new DefaultNewGameSupplier();
+  private final DefaultNewGameSupplier supplier = new DefaultNewGameSupplier();
 
   @Test
   public void shouldReturnANewGameWhenSupplierIsCalled() {

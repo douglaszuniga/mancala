@@ -12,7 +12,7 @@ import java.util.function.Function;
  * <p>Preconditions {@link Move} must not be null
  *
  * <p>Throws {@link NullPointerException} when {@link Move} is null and {@link
- * com.dzuniga.mancala.business.exceptions.MoveValidationException} when a {@link
+ * com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException} when a {@link
  * com.dzuniga.mancala.business.move.validations.MoveValidation} didn't pass
  */
 @FunctionalInterface

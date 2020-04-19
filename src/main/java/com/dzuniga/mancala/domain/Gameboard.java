@@ -24,7 +24,7 @@ public class Gameboard {
   /** Contains the section of the board per player */
   public static final Map<Player, Section> PIT_SECTIONS =
       Map.of(
-          Player.PLAYER_ONE, Section.sectionOf(0, 6), Player.PLAYER_TWO, Section.sectionOf(7, 13));
+          Player.PLAYER_ONE, Section.of(0, 6), Player.PLAYER_TWO, Section.of(7, 13));
   /**
    * Contains the position in the board where each player mancala (big house or big pit) is placed
    */

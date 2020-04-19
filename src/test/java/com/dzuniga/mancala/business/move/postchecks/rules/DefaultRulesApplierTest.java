@@ -32,7 +32,7 @@ public class DefaultRulesApplierTest {
   private Rule capturePebblesRule;
   private Rule gameEndRule;
 
-  private RulesApplier applier;
+  private DefaultRulesApplier applier;
 
   @BeforeEach
   public void setUp() {

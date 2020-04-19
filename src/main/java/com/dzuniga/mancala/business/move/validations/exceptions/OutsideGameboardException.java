@@ -1,4 +1,4 @@
-package com.dzuniga.mancala.business.exceptions;
+package com.dzuniga.mancala.business.move.validations.exceptions;
 
 import com.dzuniga.mancala.domain.Move;
 

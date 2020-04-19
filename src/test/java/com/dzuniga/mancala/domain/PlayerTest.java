@@ -1,9 +1,20 @@
 package com.dzuniga.mancala.domain;
 
+import com.dzuniga.mancala.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
+
+  @Test
+  public void testEquality() {
+    Player alpha = Player.PLAYER_ONE;
+    Player beta = Player.PLAYER_ONE;
+    Player gama = Player.PLAYER_ONE;
+    Player delta = Player.PLAYER_TWO;
+
+    TestUtils.assertEqualsContract(alpha, beta, gama, delta);
+  }
 
   @Test
   public void shouldReturnNullPointerExceptionWhenCurrentPlayerIsNull() {

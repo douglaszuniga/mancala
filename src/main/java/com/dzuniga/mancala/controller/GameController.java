@@ -1,4 +1,4 @@
-package com.dzuniga.mancala;
+package com.dzuniga.mancala.controller;
 
 import com.dzuniga.mancala.business.NewGameSupplier;
 import com.dzuniga.mancala.business.move.MoveHandler;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-//TODO: handle eceptions to code
 
 @RestController
 @RequestMapping("/v1/mancala")

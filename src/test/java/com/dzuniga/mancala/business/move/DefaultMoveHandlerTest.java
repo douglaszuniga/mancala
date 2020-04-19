@@ -1,6 +1,6 @@
 package com.dzuniga.mancala.business.move;
 
-import com.dzuniga.mancala.business.exceptions.MoveValidationException;
+import com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException;
 import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.business.move.postchecks.RulesApplier;

@@ -1,6 +1,6 @@
 package com.dzuniga.mancala.business.move.validations;
 
-import com.dzuniga.mancala.business.exceptions.MoveValidationException;
+import com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Player;

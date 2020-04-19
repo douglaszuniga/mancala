@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Simple new game supplier, it will return a new turn with a initialized game and player one being the next player
+ */
 @Component
 public class DefaultNewGameSupplier implements NewGameSupplier {
 

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * Controls and handles the game request to the system
+ */
 @RestController
 @RequestMapping("/v1/mancala")
 public class GameController {
@@ -26,6 +28,11 @@ public class GameController {
     this.moveHandler = moveHandler;
   }
 
+  /**
+   * handles the action to processing a move from the user
+   * @param move {@link Move} object containing the move intention of the user
+   * @return {@link Turn} indicating the state of the game after applying the {@link Move}
+   */
   @PutMapping(
       value = "/game/move",
       consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -35,6 +42,10 @@ public class GameController {
     return moveHandler.apply(move);
   }
 
+  /**
+   * handles the action of creating a new game
+   * @return {@link Turn} the initial turn
+   */
   @PostMapping(value = "/game", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   public Turn handleProcessNewGame() {

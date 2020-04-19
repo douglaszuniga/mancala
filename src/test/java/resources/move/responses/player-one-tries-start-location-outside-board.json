@@ -1,0 +1,4 @@
+{
+  "status": "BAD_REQUEST",
+  "message": "The move is invalid, the selected position is outside the boundaries of the gameboard."
+}

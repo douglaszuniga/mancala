@@ -1,0 +1,35 @@
+{
+  "number": 4,
+  "events": [
+    "gameEnded",
+    "tied"
+  ],
+  "currentBoard": {
+    "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",
+    "gameboard": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3
+    ]
+  },
+  "playing": {
+    "id": false
+  },
+  "playerOne": {
+    "id": true
+  },
+  "playerTwo": {
+    "id": false
+  }
+}

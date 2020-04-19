@@ -1,0 +1,4 @@
+{
+  "status": "BAD_REQUEST",
+  "message": "The move is invalid, the pit is empty, it must contain at least one pebble."
+}

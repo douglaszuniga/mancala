@@ -29,7 +29,7 @@ public class InCurrentPlayerSection implements MoveValidation {
   }
 
   private boolean isInSection(Move move, Section playerSection) {
-    return playerSection.getLow() >= move.getStartPosition()
+    return move.getStartPosition() >= playerSection.getLow()
         && move.getStartPosition() <= playerSection.getHigh();
   }
 }

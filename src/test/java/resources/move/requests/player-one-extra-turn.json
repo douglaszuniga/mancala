@@ -1,0 +1,35 @@
+{
+  "startPosition": 5,
+  "currentTurn": {
+    "number": 3,
+    "events": [],
+    "currentBoard": {
+      "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",
+      "gameboard": [
+        1,
+        8,
+        0,
+        8,
+        7,
+        1,
+        2,
+        7,
+        0,
+        8,
+        0,
+        8,
+        8,
+        10
+      ]
+    },
+    "playing": {
+      "id": true
+    },
+    "playerOne": {
+      "id": true
+    },
+    "playerTwo": {
+      "id": false
+    }
+  }
+}

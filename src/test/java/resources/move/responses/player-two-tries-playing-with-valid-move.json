@@ -1,0 +1,32 @@
+{
+  "number": 3,
+  "events": [],
+  "currentBoard": {
+    "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",
+    "gameboard": [
+      1,
+      8,
+      8,
+      8,
+      7,
+      0,
+      2,
+      7,
+      7,
+      7,
+      0,
+      8,
+      8,
+      1
+    ]
+  },
+  "playing": {
+    "id": true
+  },
+  "playerOne": {
+    "id": true
+  },
+  "playerTwo": {
+    "id": false
+  }
+}

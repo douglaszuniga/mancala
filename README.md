@@ -4,7 +4,7 @@ Mancala game app is a Spring Boot application exposing a couple of rest endpoint
 
 ## Requirements
  
-###Board Setup
+### Board Setup
 Each of the two players has his six pits in front of him. To the right of the six pits,
 each player has a larger pit. At the start of the game, there are six stones in each
 of the six round pits .

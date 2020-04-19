@@ -181,7 +181,7 @@ public class Gameboard {
     Validate.isTrue(pitPosition >= 0, "Pit position must be greater or equals to zero");
     Validate.isTrue(pitPosition < Gameboard.SIZE, "Pit position must less than board size");
 
-    log.debug("BEFORE capturing the pebbles, gameboard:[{}]", currentBoard.gameboard);
+    log.debug("BEFORE capturing the pebbles, player: [{}], pitPosition:[{}], gameboard:[{}]", currentPlayer, pitPosition, currentBoard.gameboard);
 
     int[] output = Arrays.copyOf(currentBoard.getGameboard(), Gameboard.SIZE);
     // - capture pit and opposite pit pebbles into the player's mancala
@@ -191,7 +191,7 @@ public class Gameboard {
     output[pitPosition] = 0;
     output[OPPOSITE_PIT.get(pitPosition)] = 0;
 
-    log.debug("AFTER capturing the pebbles, gameboard:[{}]", output);
+    log.debug("AFTER capturing the pebbles, player: [{}], pitPosition:[{}], gameboard:[{}]", currentPlayer, pitPosition, output);
 
     return new Gameboard(currentBoard.getId(), output);
   }

@@ -8,11 +8,13 @@ import com.dzuniga.mancala.business.move.validations.MoveValidation;
 import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Player;
 import com.dzuniga.mancala.domain.Turn;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
+@Slf4j
 public class DefaultMoveHandler implements MoveHandler {
 
   /**
@@ -60,12 +62,16 @@ public class DefaultMoveHandler implements MoveHandler {
   public Turn apply(Move move) throws MoveValidationException {
     Objects.requireNonNull(move, "The move must not be null");
 
+    log.debug("Applying move: [{}]", move);
+
     // -- first check that move is valid
     validateBeforeMoving(move);
     // -- then start dropping the pebbles
     MoveResult moveResult = dropPebblesHandler.apply(move);
+    log.debug("move result: [{}]", move);
     // -- then check what is the game status and all the possible action after applying the move
     RuleResult ruleResult = rulesApplier.apply(move, moveResult);
+    log.debug("rule result: [{}]", ruleResult);
 
     // -- finally, return the next turn information
     return Turn.builder()

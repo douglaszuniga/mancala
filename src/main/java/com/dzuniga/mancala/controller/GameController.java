@@ -6,6 +6,7 @@ import com.dzuniga.mancala.domain.Move;
 import com.dzuniga.mancala.domain.Turn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/v1/mancala")
+@CrossOrigin
 public class GameController {
 
   private final NewGameSupplier newGameSupplier;

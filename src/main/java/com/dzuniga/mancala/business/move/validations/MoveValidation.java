@@ -1,13 +1,10 @@
 package com.dzuniga.mancala.business.move.validations;
 
-import com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException;
 import com.dzuniga.mancala.domain.Move;
 
 import java.util.Objects;
 
-/**
- * Functional Interface used to indicate a validation that has to be done before applying a move
- */
+/** Functional Interface used to indicate a validation that has to be done before applying a move */
 @FunctionalInterface
 public interface MoveValidation {
   /**
@@ -17,13 +14,12 @@ public interface MoveValidation {
    *
    * <p>Expected Exceptions:
    *
-   * NullPointerException when Move is null
-   * MoveValidationException when the validation didn't pass
+   * <p>NullPointerException when Move is null MoveValidationException when the validation didn't
+   * pass
    *
    * @param move move object containing the necessary info to apply the next move
-   *
    */
-  void validate(Move move) throws MoveValidationException;
+  void validate(Move move);
 
   /**
    * Returns a composed function that first validate move and then run the {@code after} validation
@@ -31,7 +27,7 @@ public interface MoveValidation {
    * @param after validation that will be called after
    */
   default MoveValidation andThen(MoveValidation after) {
-    Objects.requireNonNull(after);
+    Objects.requireNonNull(after, "The after Move Validation must not be null");
 
     return (Move m) -> {
       validate(m);

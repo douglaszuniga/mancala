@@ -1,6 +1,5 @@
 package com.dzuniga.mancala.business.move;
 
-import com.dzuniga.mancala.business.move.validations.exceptions.MoveValidationException;
 import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.business.move.postchecks.RulesApplier;
@@ -17,22 +16,17 @@ import java.util.Objects;
 @Slf4j
 public class DefaultMoveHandler implements MoveHandler {
 
-  /**
-   * all the validations that need to run BEFORE applying the move
-   */
+  /** all the validations that need to run BEFORE applying the move */
   private final MoveValidation inCurrentPlayerSection;
+
   private final MoveValidation insideBoard;
   private final MoveValidation pitHasPebbles;
   private final MoveValidation fromAPit;
 
-  /**
-   * handler that knows how to apply the move in the gameboard
-   */
+  /** handler that knows how to apply the move in the gameboard */
   private final DropPebblesHandler dropPebblesHandler;
 
-  /**
-   * check all the game rules and apply the actions based on those rules
-   */
+  /** check all the game rules and apply the actions based on those rules */
   private final RulesApplier rulesApplier;
 
   public DefaultMoveHandler(
@@ -43,11 +37,13 @@ public class DefaultMoveHandler implements MoveHandler {
       DropPebblesHandler dropPebblesHandler,
       RulesApplier rulesApplier) {
 
-    Objects.requireNonNull(inCurrentPlayerSection, "The inCurrentPlayerSection validation must not be null");
+    Objects.requireNonNull(
+        inCurrentPlayerSection, "The inCurrentPlayerSection validation must not be null");
     Objects.requireNonNull(insideBoard, "The insideBoard validation must not be null");
     Objects.requireNonNull(pitHasPebbles, "The pitHasPebbles validation must not be null");
     Objects.requireNonNull(fromAPit, "The fromAPit validation must not be null");
-    Objects.requireNonNull(dropPebblesHandler, "The dropPebblesHandler validation must not be null");
+    Objects.requireNonNull(
+        dropPebblesHandler, "The dropPebblesHandler validation must not be null");
     Objects.requireNonNull(rulesApplier, "The rulesApplier validation must not be null");
 
     this.inCurrentPlayerSection = inCurrentPlayerSection;
@@ -59,7 +55,7 @@ public class DefaultMoveHandler implements MoveHandler {
   }
 
   @Override
-  public Turn apply(Move move) throws MoveValidationException {
+  public Turn apply(Move move) {
     Objects.requireNonNull(move, "The move must not be null");
 
     log.debug("Applying move: [{}]", move);
@@ -86,10 +82,10 @@ public class DefaultMoveHandler implements MoveHandler {
 
   /**
    * encapsulates all the validations required before the move
+   *
    * @param move object containing the information regarding the move
-   * @throws MoveValidationException exception in case it didn't pass a validation
    */
-  private void validateBeforeMoving(Move move) throws MoveValidationException {
+  private void validateBeforeMoving(Move move) {
     insideBoard
         .andThen(inCurrentPlayerSection)
         .andThen(fromAPit)

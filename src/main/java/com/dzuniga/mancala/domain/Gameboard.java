@@ -58,23 +58,23 @@ public class Gameboard {
   /** Just an id to check in the logs */
   private final String id;
   /** Game state */
-  private final int[] gameboard;
+  private final int[] board;
 
   @JsonCreator
-  public Gameboard(@JsonProperty("id") String id, @JsonProperty("gameboard") int[] gameboard) {
+  public Gameboard(@JsonProperty("id") String id, @JsonProperty("gameboard") int[] board) {
     Validate.isTrue(StringUtils.isNotBlank(id), "Gameboard Id must not be null or blank");
-    Objects.requireNonNull(gameboard, "The gameboard must not be null");
+    Objects.requireNonNull(board, "The gameboard must not be null");
     Validate.isTrue(
-        Gameboard.SIZE == gameboard.length,
+        Gameboard.SIZE == board.length,
         "The Gameboard size must contain 12 pits and two mancalas");
 
     this.id = id;
-    this.gameboard = gameboard;
+    this.board = board;
   }
 
   private Gameboard() {
     id = UUID.randomUUID().toString();
-    this.gameboard = new int[Gameboard.SIZE];
+    this.board = new int[Gameboard.SIZE];
 
     init();
   }
@@ -84,9 +84,9 @@ public class Gameboard {
     int counter = 0;
     while (counter < Gameboard.SIZE) {
       if (MANCALAS.containsValue(counter)) {
-        gameboard[counter] = Gameboard.NUMBER_OF_PEBBLES_PER_MANCALA;
+        board[counter] = Gameboard.NUMBER_OF_PEBBLES_PER_MANCALA;
       } else {
-        gameboard[counter] = Gameboard.NUMBER_OF_PEBBLES_PER_PIT;
+        board[counter] = Gameboard.NUMBER_OF_PEBBLES_PER_PIT;
       }
       counter++;
     }
@@ -102,7 +102,7 @@ public class Gameboard {
     Validate.isTrue(pitPosition >= 0, "Pit position must be greater equals to zero");
     Validate.isTrue(pitPosition < SIZE, "Pit position must be less than board size");
 
-    return gameboard[pitPosition];
+    return board[pitPosition];
   }
 
   /**
@@ -114,7 +114,7 @@ public class Gameboard {
   public boolean isPitSectionEmpty(Section section) {
     Objects.requireNonNull(section, "Section must not be null");
 
-    int[] boardSection = Arrays.copyOfRange(gameboard, section.getLow(), section.getHigh());
+    int[] boardSection = Arrays.copyOfRange(board, section.getLow(), section.getHigh());
 
     return Arrays.stream(boardSection).sum() == 0;
   }
@@ -142,9 +142,9 @@ public class Gameboard {
   public static Gameboard collectPebblesIntoMancalas(Gameboard currentBoard) {
     Objects.requireNonNull(currentBoard, "Input gameboard must not be null");
 
-    log.debug("BEFORE collecting the pebbles, gameboard:[{}]", currentBoard.gameboard);
+    log.debug("BEFORE collecting the pebbles, gameboard:[{}]", currentBoard.board);
 
-    int[] output = Arrays.copyOf(currentBoard.getGameboard(), Gameboard.SIZE);
+    int[] output = Arrays.copyOf(currentBoard.getBoard(), Gameboard.SIZE);
     int sumBySection = 0;
     for (int i = 0; i < SIZE; i++) {
       if (Gameboard.MANCALAS.containsValue(i)) {
@@ -181,9 +181,9 @@ public class Gameboard {
     Validate.isTrue(pitPosition >= 0, "Pit position must be greater or equals to zero");
     Validate.isTrue(pitPosition < Gameboard.SIZE, "Pit position must less than board size");
 
-    log.debug("BEFORE capturing the pebbles, player: [{}], pitPosition:[{}], gameboard:[{}]", currentPlayer, pitPosition, currentBoard.gameboard);
+    log.debug("BEFORE capturing the pebbles, player: [{}], pitPosition:[{}], gameboard:[{}]", currentPlayer, pitPosition, currentBoard.board);
 
-    int[] output = Arrays.copyOf(currentBoard.getGameboard(), Gameboard.SIZE);
+    int[] output = Arrays.copyOf(currentBoard.getBoard(), Gameboard.SIZE);
     // - capture pit and opposite pit pebbles into the player's mancala
     output[Gameboard.MANCALAS.get(currentPlayer)] +=
         output[pitPosition] + output[OPPOSITE_PIT.get(pitPosition)];

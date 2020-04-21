@@ -51,15 +51,15 @@ public class GameEndConsequenceTest {
     RuleResult expected =
         RuleResult.of(
             expectedBoard,
-            List.of(GameEvent.newGameStarted, GameEvent.gameEnded, GameEvent.playerOneWon),
+            List.of(GameEvent.NEW_GAME_STARTED, GameEvent.GAME_ENDED, GameEvent.PLAYER_ONE_WON),
             playing);
 
     RuleResult actual =
         consequence.apply(
-            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.newGameStarted)),
+            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.NEW_GAME_STARTED)),
             playing);
 
-    assertArrayEquals(expected.getGameboard().getGameboard(), actual.getGameboard().getGameboard());
+    assertArrayEquals(expected.getGameboard().getBoard(), actual.getGameboard().getBoard());
     assertEquals(expected.getGameEvents(), actual.getGameEvents());
     assertEquals(expected.getNextPlayer(), actual.getNextPlayer());
   }
@@ -80,15 +80,15 @@ public class GameEndConsequenceTest {
     RuleResult expected =
         RuleResult.of(
             expectedBoard,
-            List.of(GameEvent.newGameStarted, GameEvent.gameEnded, GameEvent.playerTwoWon),
+            List.of(GameEvent.NEW_GAME_STARTED, GameEvent.GAME_ENDED, GameEvent.PLAYER_TWO_WON),
             playing);
 
     RuleResult actual =
         consequence.apply(
-            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.newGameStarted)),
+            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.NEW_GAME_STARTED)),
             playing);
 
-    assertArrayEquals(expected.getGameboard().getGameboard(), actual.getGameboard().getGameboard());
+    assertArrayEquals(expected.getGameboard().getBoard(), actual.getGameboard().getBoard());
     assertEquals(expected.getGameEvents(), actual.getGameEvents());
     assertEquals(expected.getNextPlayer(), actual.getNextPlayer());
   }
@@ -109,15 +109,15 @@ public class GameEndConsequenceTest {
     RuleResult expected =
         RuleResult.of(
             expectedBoard,
-            List.of(GameEvent.newGameStarted, GameEvent.gameEnded, GameEvent.tied),
+            List.of(GameEvent.NEW_GAME_STARTED, GameEvent.GAME_ENDED, GameEvent.TIED),
             playing);
 
     RuleResult actual =
         consequence.apply(
-            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.newGameStarted)),
+            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.NEW_GAME_STARTED)),
             playing);
 
-    assertArrayEquals(expected.getGameboard().getGameboard(), actual.getGameboard().getGameboard());
+    assertArrayEquals(expected.getGameboard().getBoard(), actual.getGameboard().getBoard());
     assertEquals(expected.getGameEvents(), actual.getGameEvents());
     assertEquals(expected.getNextPlayer(), actual.getNextPlayer());
   }

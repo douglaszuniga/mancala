@@ -29,7 +29,7 @@ public class CapturePebblesConsequence implements Consequence {
 
     return RuleResult.of(
         boardAfterCapturing,
-        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.pebblesCaptured)),
+        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.PEBBLES_CAPTURED)),
         Player.getOppositePlayer(currentPlayer));
   }
 }

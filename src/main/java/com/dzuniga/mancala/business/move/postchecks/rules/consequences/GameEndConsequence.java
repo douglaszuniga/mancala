@@ -34,7 +34,7 @@ public class GameEndConsequence implements Consequence {
     return RuleResult.of(
         boardAfterCollectingRemainingPebbles,
         GameEventCombiner.combine(
-            moveResult.getGameEvents(), List.of(GameEvent.gameEnded, endGameResult)),
+            moveResult.getGameEvents(), List.of(GameEvent.GAME_ENDED, endGameResult)),
         currentPlayer);
   }
 
@@ -50,13 +50,13 @@ public class GameEndConsequence implements Consequence {
         totalPebblesPlayerTwo);
 
     if (totalPebblesPlayerOne == totalPebblesPlayerTwo) {
-      return GameEvent.tied;
+      return GameEvent.TIED;
     }
 
     if (totalPebblesPlayerOne > totalPebblesPlayerTwo) {
-      return GameEvent.playerOneWon;
+      return GameEvent.PLAYER_ONE_WON;
     }
 
-    return GameEvent.playerTwoWon;
+    return GameEvent.PLAYER_TWO_WON;
   }
 }

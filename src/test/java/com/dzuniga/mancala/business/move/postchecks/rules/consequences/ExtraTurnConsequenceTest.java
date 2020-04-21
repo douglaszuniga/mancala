@@ -43,10 +43,10 @@ public class ExtraTurnConsequenceTest {
     // - next player is the current player
     RuleResult expected =
             RuleResult.of(
-                    currentBoard, List.of(GameEvent.newGameStarted, GameEvent.extraTurnGained), playing);
+                    currentBoard, List.of(GameEvent.NEW_GAME_STARTED, GameEvent.EXTRA_TURN_GAINED), playing);
 
     RuleResult actual =
-            consequence.apply(MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.newGameStarted)), playing);
+            consequence.apply(MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.NEW_GAME_STARTED)), playing);
 
     assertEquals(expected, actual);
   }

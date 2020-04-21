@@ -1,8 +1,8 @@
 {
   "number": 4,
   "events": [
-    "gameEnded",
-    "playerOneWon"
+    "GAME_ENDED",
+    "PLAYER_ONE_WON"
   ],
   "currentBoard": {
     "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",

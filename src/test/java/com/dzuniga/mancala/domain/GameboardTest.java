@@ -94,7 +94,7 @@ public class GameboardTest {
 
     Gameboard actual = Gameboard.captureOppositePitPebbles(currentBoard, lastDropPosition, playing);
 
-    assertArrayEquals(expected.getGameboard(), actual.getGameboard());
+    assertArrayEquals(expected.getBoard(), actual.getBoard());
   }
 
   @Test
@@ -129,7 +129,7 @@ public class GameboardTest {
 
     Gameboard actual = Gameboard.collectPebblesIntoMancalas(currentBoard);
 
-    assertArrayEquals(expected.getGameboard(), actual.getGameboard());
+    assertArrayEquals(expected.getBoard(), actual.getBoard());
   }
 
   @Test

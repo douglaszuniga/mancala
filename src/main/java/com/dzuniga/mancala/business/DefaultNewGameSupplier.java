@@ -21,7 +21,7 @@ public class DefaultNewGameSupplier implements NewGameSupplier {
         .currentBoard(Gameboard.newGameBoard())
         .playerOne(Player.PLAYER_ONE)
         .playerTwo(Player.PLAYER_TWO)
-        .events(List.of(GameEvent.newGameStarted))
+        .events(List.of(GameEvent.NEW_GAME_STARTED))
         .playing(Player.PLAYER_ONE)
         .build();
   }

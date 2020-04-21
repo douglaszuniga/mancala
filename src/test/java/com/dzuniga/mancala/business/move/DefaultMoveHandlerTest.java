@@ -72,7 +72,7 @@ public class DefaultMoveHandlerTest {
 
     MoveResult moveResult = MoveResult.of(gameboard, 0, List.of());
     RuleResult ruleResult =
-        RuleResult.of(gameboard, List.of(GameEvent.newGameStarted), Player.PLAYER_ONE);
+        RuleResult.of(gameboard, List.of(GameEvent.NEW_GAME_STARTED), Player.PLAYER_ONE);
 
     when(moveValidation.andThen(any(MoveValidation.class))).thenCallRealMethod();
 
@@ -85,7 +85,7 @@ public class DefaultMoveHandlerTest {
     Assertions.assertEquals(ruleResult.getNextPlayer(), turn.getPlaying());
     Assertions.assertEquals(turn.getNumber() + 1, actual.getNumber());
     Assertions.assertArrayEquals(
-        ruleResult.getGameboard().getGameboard(), turn.getCurrentBoard().getGameboard());
+        ruleResult.getGameboard().getBoard(), turn.getCurrentBoard().getBoard());
 
     verify(moveValidation, times(4)).validate(any(Move.class));
     verify(dropPebblesHandler).apply(any(Move.class));
@@ -109,7 +109,7 @@ public class DefaultMoveHandlerTest {
     Move move = Move.builder().startPosition(lastDropPosition).currentTurn(turn).build();
 
     RuleResult ruleResult =
-        RuleResult.of(gameboard, List.of(GameEvent.newGameStarted), Player.PLAYER_ONE);
+        RuleResult.of(gameboard, List.of(GameEvent.NEW_GAME_STARTED), Player.PLAYER_ONE);
 
     when(moveValidation.andThen(any(MoveValidation.class))).thenCallRealMethod();
     doThrow(new MoveValidationException(move)).when(moveValidation).validate(any(Move.class));

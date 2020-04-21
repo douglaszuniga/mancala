@@ -1,7 +1,7 @@
 {
   "number": 4,
   "events": [
-    "extraTurnGained"
+    "EXTRA_TURN_GAINED"
   ],
   "currentBoard": {
     "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",

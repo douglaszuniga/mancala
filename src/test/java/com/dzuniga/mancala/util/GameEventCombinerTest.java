@@ -24,15 +24,15 @@ public class GameEventCombinerTest {
   public void shouldReturnNewListWhenBothListAreProvided() {
     List<GameEvent> actual =
         GameEventCombiner.combine(
-            List.of(GameEvent.newGameStarted, GameEvent.extraTurnGained),
-            List.of(GameEvent.gameEnded, GameEvent.tied));
+            List.of(GameEvent.NEW_GAME_STARTED, GameEvent.EXTRA_TURN_GAINED),
+            List.of(GameEvent.GAME_ENDED, GameEvent.TIED));
 
     Assertions.assertEquals(
         List.of(
-            GameEvent.newGameStarted,
-            GameEvent.extraTurnGained,
-            GameEvent.gameEnded,
-            GameEvent.tied),
+            GameEvent.NEW_GAME_STARTED,
+            GameEvent.EXTRA_TURN_GAINED,
+            GameEvent.GAME_ENDED,
+            GameEvent.TIED),
         actual);
   }
 }

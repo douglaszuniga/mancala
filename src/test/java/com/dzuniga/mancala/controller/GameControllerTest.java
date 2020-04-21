@@ -40,7 +40,7 @@ public class GameControllerTest implements FileLoader {
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.number").isNumber())
         .andExpect(jsonPath("$.number").value(initialTurnNumber))
-        .andExpect(jsonPath("$.events[0]").value(GameEvent.newGameStarted.toString()))
+        .andExpect(jsonPath("$.events[0]").value(GameEvent.NEW_GAME_STARTED.toString()))
         .andExpect(jsonPath("$.playing.id").isBoolean())
         .andExpect(jsonPath("$.playing.id").value(Player.PLAYER_ONE.getId()))
         .andExpect(jsonPath("$.playerOne.id").isBoolean())

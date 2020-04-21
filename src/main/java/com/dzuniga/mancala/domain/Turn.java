@@ -11,13 +11,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Data class containing the information regarding a turn
- */
+/** Data class containing the information regarding a turn */
 @Data
 public class Turn {
 
-  private final Integer number;
+  private final int number;
   private final List<GameEvent> events;
   private final Gameboard currentBoard;
   private final Player playing;
@@ -27,15 +25,13 @@ public class Turn {
   @Builder
   @JsonCreator
   public Turn(
-          @JsonProperty("number") Integer number,
-          @JsonProperty("events") List<GameEvent> events,
-          @JsonProperty("currentBoard") Gameboard currentBoard,
-          @JsonProperty("playing") Player playing,
-          @JsonProperty("playerOne") Player playerOne,
-          @JsonProperty("playerTwo") Player playerTwo
-  ) {
+      @JsonProperty("number") int number,
+      @JsonProperty("events") List<GameEvent> events,
+      @JsonProperty("currentBoard") Gameboard currentBoard,
+      @JsonProperty("playing") Player playing,
+      @JsonProperty("playerOne") Player playerOne,
+      @JsonProperty("playerTwo") Player playerTwo) {
 
-    Objects.requireNonNull(number, "Turn number must not be null");
     Validate.isTrue(number >= 0, "Turn number must be greater or equals to zero");
     Objects.requireNonNull(playing, "The current player must not be null");
     Objects.requireNonNull(playerOne, "Player One must not be null");

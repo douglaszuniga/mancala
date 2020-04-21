@@ -1,9 +1,9 @@
 {
   "number": 4,
   "events": [
-    "extraTurnGained",
-    "gameEnded",
-    "playerTwoWon"
+    "EXTRA_TURN_GAINED",
+    "GAME_ENDED",
+    "PLAYER_TWO_WON"
   ],
   "currentBoard": {
     "id": "fba44899-ad16-47d0-ab1e-dc8c87e763b7",

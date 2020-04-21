@@ -48,12 +48,12 @@ public class CapturePebblesConsequenceTest {
     // - next player is the opposite of current player
     RuleResult expected =
         RuleResult.of(
-            expectedBoard, List.of(GameEvent.pebblesCaptured), Player.getOppositePlayer(playing));
+            expectedBoard, List.of(GameEvent.PEBBLES_CAPTURED), Player.getOppositePlayer(playing));
 
     RuleResult actual =
         consequence.apply(MoveResult.of(currentBoard, lastDropPosition, List.of()), playing);
 
-    assertArrayEquals(expected.getGameboard().getGameboard(), actual.getGameboard().getGameboard());
+    assertArrayEquals(expected.getGameboard().getBoard(), actual.getGameboard().getBoard());
     assertEquals(expected.getGameEvents(), actual.getGameEvents());
     assertEquals(expected.getNextPlayer(), actual.getNextPlayer());
   }
@@ -72,15 +72,15 @@ public class CapturePebblesConsequenceTest {
     RuleResult expected =
         RuleResult.of(
             expectedBoard,
-            List.of(GameEvent.newGameStarted, GameEvent.pebblesCaptured),
+            List.of(GameEvent.NEW_GAME_STARTED, GameEvent.PEBBLES_CAPTURED),
             Player.getOppositePlayer(playing));
 
     RuleResult actual =
         consequence.apply(
-            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.newGameStarted)),
+            MoveResult.of(currentBoard, lastDropPosition, List.of(GameEvent.NEW_GAME_STARTED)),
             playing);
 
-    assertArrayEquals(expected.getGameboard().getGameboard(), actual.getGameboard().getGameboard());
+    assertArrayEquals(expected.getGameboard().getBoard(), actual.getGameboard().getBoard());
     assertEquals(expected.getGameEvents(), actual.getGameEvents());
     assertEquals(expected.getNextPlayer(), actual.getNextPlayer());
   }

@@ -3,7 +3,6 @@ package com.dzuniga.mancala.business.move.postchecks.rules;
 import com.dzuniga.mancala.business.move.model.MoveResult;
 import com.dzuniga.mancala.business.move.model.RuleResult;
 import com.dzuniga.mancala.business.move.postchecks.DefaultRulesApplier;
-import com.dzuniga.mancala.business.move.postchecks.RulesApplier;
 import com.dzuniga.mancala.domain.GameEvent;
 import com.dzuniga.mancala.domain.Gameboard;
 import com.dzuniga.mancala.domain.Move;
@@ -78,7 +77,7 @@ public class DefaultRulesApplierTest {
             MoveResult.of(gameboard, lastDropPosition, List.of()));
 
     // default actual means nothing changed
-    Assertions.assertArrayEquals(gameboard.getGameboard(), actual.getGameboard().getGameboard());
+    Assertions.assertArrayEquals(gameboard.getBoard(), actual.getGameboard().getBoard());
     Assertions.assertTrue(actual.getGameEvents().isEmpty());
     Assertions.assertEquals(Player.getOppositePlayer(turn.getPlaying()), actual.getNextPlayer());
 
@@ -100,7 +99,7 @@ public class DefaultRulesApplierTest {
             .build();
 
     RuleResult expected =
-        RuleResult.of(gameboard, List.of(GameEvent.extraTurnGained), turn.getPlaying());
+        RuleResult.of(gameboard, List.of(GameEvent.EXTRA_TURN_GAINED), turn.getPlaying());
 
     applyDefaultBehaviourToRule(extraTurnRule, expected);
 
@@ -133,7 +132,7 @@ public class DefaultRulesApplierTest {
     RuleResult expected =
         RuleResult.of(
             gameboard,
-            List.of(GameEvent.pebblesCaptured),
+            List.of(GameEvent.PEBBLES_CAPTURED),
             Player.getOppositePlayer(turn.getPlaying()));
 
     applyDefaultBehaviourToRule(capturePebblesRule, expected);
@@ -165,7 +164,7 @@ public class DefaultRulesApplierTest {
             .build();
 
     RuleResult expected =
-        RuleResult.of(gameboard, List.of(GameEvent.gameEnded, GameEvent.tied), turn.getPlaying());
+        RuleResult.of(gameboard, List.of(GameEvent.GAME_ENDED, GameEvent.TIED), turn.getPlaying());
 
     applyDefaultBehaviourToRule(gameEndRule, expected);
 
@@ -196,14 +195,14 @@ public class DefaultRulesApplierTest {
             .build();
 
     RuleResult capturePebblesResult =
-        RuleResult.of(gameboard, List.of(GameEvent.pebblesCaptured), turn.getPlaying());
+        RuleResult.of(gameboard, List.of(GameEvent.PEBBLES_CAPTURED), turn.getPlaying());
 
     applyDefaultBehaviourToRule(capturePebblesRule, capturePebblesResult);
 
     RuleResult expected =
         RuleResult.of(
             gameboard,
-            List.of(GameEvent.pebblesCaptured, GameEvent.gameEnded, GameEvent.tied),
+            List.of(GameEvent.PEBBLES_CAPTURED, GameEvent.GAME_ENDED, GameEvent.TIED),
             turn.getPlaying());
 
     applyDefaultBehaviourToRule(gameEndRule, expected);

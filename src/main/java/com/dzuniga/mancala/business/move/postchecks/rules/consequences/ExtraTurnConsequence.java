@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * Applies the action indicating that the next player is equals to current player and add the
- * extraTurnGained event to the result not side effects in the board
+ * EXTRA_TURN_GAINED event to the result not side effects in the board
  */
 @Component
 public class ExtraTurnConsequence implements Consequence {
@@ -24,7 +24,7 @@ public class ExtraTurnConsequence implements Consequence {
 
     return RuleResult.of(
         moveResult.getGameboard(),
-        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.extraTurnGained)),
+        GameEventCombiner.combine(moveResult.getGameEvents(), List.of(GameEvent.EXTRA_TURN_GAINED)),
         currentPlayer);
   }
 }

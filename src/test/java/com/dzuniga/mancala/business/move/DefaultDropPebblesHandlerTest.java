@@ -50,16 +50,17 @@ public class DefaultDropPebblesHandlerTest {
 
     MoveResult result = handler.apply(Move.builder().startPosition(0).currentTurn(turn).build());
 
-    int[] expectedBoard = gameboard.getGameboard();
+    int[] expectedBoard = gameboard.getBoard();
     int expectedLastPosition = 0;
 
-    assertArrayEquals(expectedBoard, result.getGameboard().getGameboard());
+    assertArrayEquals(expectedBoard, result.getGameboard().getBoard());
     assertEquals(expectedLastPosition, result.getLastDropPosition(), "incorrect lastPosition");
     assertTrue(result.getGameEvents().isEmpty());
   }
 
   @Test
-  public void shouldNotDropPebbleInOpponentMancalaWhenMovingFromOpponentSectionToCurrentPlayerSection() {
+  public void
+      shouldNotDropPebbleInOpponentMancalaWhenMovingFromOpponentSectionToCurrentPlayerSection() {
     Gameboard gameboard =
         new Gameboard(
             "id",
@@ -79,7 +80,8 @@ public class DefaultDropPebblesHandlerTest {
 
     int startPosition = 5;
 
-    MoveResult result = handler.apply(Move.builder().startPosition(startPosition).currentTurn(turn).build());
+    MoveResult actual =
+        handler.apply(Move.builder().startPosition(startPosition).currentTurn(turn).build());
 
     int[] expectedBoard =
         new int[] {
@@ -88,22 +90,19 @@ public class DefaultDropPebblesHandlerTest {
         };
     int expectedLastPosition = 2;
 
+    assertEquals(0, actual.getGameboard().getBoard()[startPosition], "Start pit should be empty");
     assertEquals(
-            result.getGameboard().getGameboard()[startPosition],
-            0,
-            "Start pit should be empty");
-    assertEquals(
-        result.getGameboard().getGameboard()[Gameboard.MANCALAS.get(turn.getPlaying())],
         2,
+        actual.getGameboard().getBoard()[Gameboard.MANCALAS.get(turn.getPlaying())],
         "Current Player's Mancala should contain 2 pebble");
     assertEquals(
-        result.getGameboard()
-            .getGameboard()[Gameboard.MANCALAS.get(Player.getOppositePlayer(turn.getPlaying()))],
         0,
+        actual.getGameboard()
+            .getBoard()[Gameboard.MANCALAS.get(Player.getOppositePlayer(turn.getPlaying()))],
         "Opposite Player's Mancala should be empty");
-    assertArrayEquals(expectedBoard, result.getGameboard().getGameboard());
-    assertEquals(expectedLastPosition, result.getLastDropPosition(), "incorrect lastPosition");
-    assertTrue(result.getGameEvents().isEmpty());
+    assertArrayEquals(expectedBoard, actual.getGameboard().getBoard());
+    assertEquals(expectedLastPosition, actual.getLastDropPosition(), "incorrect lastPosition");
+    assertTrue(actual.getGameEvents().isEmpty());
   }
 
   @Test
@@ -134,7 +133,7 @@ public class DefaultDropPebblesHandlerTest {
         };
     int expectedLastPosition = 4;
 
-    assertArrayEquals(expectedBoard, result.getGameboard().getGameboard());
+    assertArrayEquals(expectedBoard, result.getGameboard().getBoard());
     assertEquals(expectedLastPosition, result.getLastDropPosition(), "incorrect lastPosition");
     assertTrue(result.getGameEvents().isEmpty());
   }

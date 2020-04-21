@@ -23,7 +23,7 @@ public class DefaultNewGameSupplierTest {
             .currentBoard(Gameboard.newGameBoard())
             .playerOne(Player.PLAYER_ONE)
             .playerTwo(Player.PLAYER_TWO)
-            .events(List.of(GameEvent.newGameStarted))
+            .events(List.of(GameEvent.NEW_GAME_STARTED))
             .playing(Player.PLAYER_ONE)
             .build();
 
@@ -35,6 +35,6 @@ public class DefaultNewGameSupplierTest {
     assertEquals(expected.getPlayerTwo(), actual.getPlayerTwo());
     assertEquals(expected.getEvents(), actual.getEvents());
     assertArrayEquals(
-        expected.getCurrentBoard().getGameboard(), actual.getCurrentBoard().getGameboard());
+        expected.getCurrentBoard().getBoard(), actual.getCurrentBoard().getBoard());
   }
 }

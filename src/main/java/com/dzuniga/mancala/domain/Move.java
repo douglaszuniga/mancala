@@ -7,11 +7,12 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /** Data class that contains the information regarding a move */
 @Data
-public class Move {
+public class Move implements Serializable {
   private final Turn currentTurn;
   private final int startPosition;
 

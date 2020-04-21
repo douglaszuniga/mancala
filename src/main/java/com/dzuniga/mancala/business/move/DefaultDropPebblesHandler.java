@@ -42,7 +42,7 @@ public class DefaultDropPebblesHandler implements DropPebblesHandler {
     // - number of pebbles in the start position
     // - it will indicate number of pits + mancala where we have to drop a pebble
     int pebblesInPit = board.getNumberOfPebblesInPit(startPosition);
-    int[] newBoard = Arrays.copyOf(board.getGameboard(), Gameboard.SIZE);
+    int[] newBoard = Arrays.copyOf(board.getBoard(), Gameboard.SIZE);
 
     int pebblesDropped = 1;
     // - take out all the pebbles from the pit
